@@ -10,7 +10,10 @@
 	export let operations: any[] = [];
 	export let latestBlock = 0;
 
-	$: contract = Object.entries(entity).length && entity.address ? new ethers.Contract(entity.address, entity.abi, $provider) : null
+	$: contract =
+		Object.entries(entity).length && entity.address
+			? new ethers.Contract(entity.address, entity.abi, $provider)
+			: null;
 
 	let collapsed: { [collapse: string]: boolean } = {};
 </script>
@@ -18,7 +21,7 @@
 {#if isLoading}
 	<div class="h-72 w-full skeleton rounded-2xl p-2"></div>
 {:else if operations.length && entity}
-	<div class="section list !p-0 !bg-transparent">
+	<div class="section list !bg-transparent !p-0">
 		{#each operations as operation, i}
 			{#if operation && operation.type !== 'constructor'}
 				<div class="collapse rounded-xl bg-base-100" class:collapse-open={collapsed[i]}>
@@ -30,7 +33,7 @@
 							}
 						}}
 					>
-						<span class="badge badge-lg pl-4 !h-auto min-h-10 border-0 bg-base-100">
+						<span class="badge !h-auto min-h-10 border-0 bg-base-100 badge-lg pl-4">
 							<span class="pointer-events-none">{operation.name ?? 'Unknown name'}</span>
 							<ClipboardCopyBtn value={operation.name} class="hover:!bg-base-300" />
 						</span>

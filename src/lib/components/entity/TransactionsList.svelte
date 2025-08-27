@@ -14,7 +14,7 @@
 </script>
 
 {#if isLoading}
-	<div class="skeleton h-42 w-full"></div>
+	<div class="h-42 w-full skeleton"></div>
 {:else}
 	<DataList
 		class={className}

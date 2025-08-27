@@ -14,10 +14,6 @@
 	<title>AMI Blockchain Explorer</title>
 </svelte:head>
 
-<div class="container">
-	<div class="alert alert-info text-lg font-medium justify-center">This is a preview version, it may contain bugs or lack certain features.</div>
-</div>
-
 <div class="container mx-4 grid grid-cols-1 md:grid-cols-6 xl:grid-cols-12">
 	<div class="col-span-4 flex w-full flex-col gap-2 rounded-xl bg-base-200">
 		<GasPriceStat />

@@ -9,6 +9,5 @@
 			<span class="text-lg font-medium">Blockchain Explorer</span>
 		</a>
 		<!--		<Searchbar class="ml-auto min-w-1/3" />-->
-		<span class="alert alert-info text-medium sm:px-8 whitespace-nowrap ml-auto">Preview version</span>
 	</div>
 </div>

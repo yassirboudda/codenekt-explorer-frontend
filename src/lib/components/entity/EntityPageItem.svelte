@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type {Component} from "svelte";
+	import type { Component } from 'svelte';
 	import ClipboardCopyBtn from '$lib/components/utilities/ClipboardCopyBtn.svelte';
 
 	interface EntityPageItem {

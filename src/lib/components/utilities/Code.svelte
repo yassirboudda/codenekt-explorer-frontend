@@ -1,5 +1,5 @@
 <script lang="ts">
-	import 'highlight.js/styles/vs2015.min.css'
+	import 'highlight.js/styles/vs2015.min.css';
 	import hljs from 'highlight.js';
 	import javascript from 'highlight.js/lib/languages/javascript';
 	import typescript from 'highlight.js/lib/languages/typescript';
@@ -67,20 +67,20 @@
 		</button>
 	</div>
 
-	<pre class:expanded={isExpanded}><code class="{codeClass}"
-		><slot>{@html hljs.highlight(code.trim(), { language }).value}</slot></code
-	></pre>
+	<pre class:expanded={isExpanded}><code class={codeClass}
+			><slot>{@html hljs.highlight(code.trim(), { language }).value}</slot></code
+		></pre>
 </div>
 
 <style lang="postcss">
 	@reference "$lib/../app.css";
 
 	.code {
-		@apply relative rounded-2xl;
+		@apply relative rounded-2xl bg-base-100 p-2;
 	}
 	.code pre {
-		@apply p-2 m-0 my-2 rounded-xl overflow-auto !bg-base-100;
-		@apply wrap-break-word whitespace-pre-wrap wrap-anywhere;
+		@apply overflow-auto rounded-xl !bg-base-200 p-2;
+		@apply wrap-anywhere wrap-break-word whitespace-pre-wrap;
 		&:not(.expanded) {
 			max-height: 300px;
 		}
@@ -96,7 +96,7 @@
 	.header {
 		@apply sticky top-17;
 		@apply flex items-center gap-2 px-4 py-2 capitalize;
-		@apply bg-base-200;
+		@apply rounded-2xl bg-base-100;
 		z-index: 9 !important;
 	}
 	.copy {

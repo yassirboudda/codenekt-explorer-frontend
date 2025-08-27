@@ -10,10 +10,12 @@
 	export let href = '#';
 	export let isLoading = true;
 
+	let entity: any;
 	onMount(async () => {
-		if(href === '#') {
-			const entity = await fetch(`/api/entity/resolve/${address}`).then((res) => res.json());
-			kind = entity.kind
+		if (href === '#') {
+			const res = await fetch(`/api/entity/resolve/${address}`).then((res) => res.json());
+			if(res.data) entity = res.data
+			if(res.kind) kind = res.kind;
 			href = `/${kind ?? 'address'}/${address}`;
 			isLoading = false;
 		}
@@ -36,7 +38,7 @@
 		{:else}
 			<WalletIcon />
 		{/if}
-		<span class="ml-2">{address}</span>
+		<span class="ml-2">{entity?.name?.length ? entity.name : address}</span>
 	</a>
-	<ClipboardCopyBtn value={address} />
+	<ClipboardCopyBtn value={entity?.name?.length ? entity.name : address} />
 </div>

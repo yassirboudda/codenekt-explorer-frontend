@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Component } from 'svelte';
 	import Breadcrumb from '$lib/components/layout/Breadcrumb.svelte';
-	import EntityPageItem from "$lib/components/entity/EntityPageItem.svelte";
+	import EntityPageItem from '$lib/components/entity/EntityPageItem.svelte';
 	import HomeIcon from 'virtual:icons/hugeicons/home-07';
 
 	export let items: { items: Partial<EntityPageItem>[] }[] = [];
@@ -16,7 +16,7 @@
 		{ type: 'a', icon: HomeIcon, href: '/' },
 		...(breadcrumbParentItem ? [breadcrumbParentItem] : []),
 		{
-			title: `${entityName ?? ''} ${(entityIdMin ?? entityId ?? 'not found')}`,
+			title: `${entityName ?? ''} ${entityIdMin ?? entityId ?? 'not found'}`,
 			class: 'flex-1',
 			icon: entityIcon
 		}

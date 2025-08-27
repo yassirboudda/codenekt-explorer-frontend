@@ -54,9 +54,12 @@
 >
 	<svelte:fragment slot="after-content">
 		{#if data?.block?.number}
-			<Tabs tabClass="text-lg" tabs={[ { icon: TxIcon, label: `Transactions (${data?.transactions?.length ?? 0})` } ]} />
+			<Tabs
+				tabClass="text-lg"
+				tabs={[{ icon: TxIcon, label: `Transactions (${data?.transactions?.length ?? 0})` }]}
+			/>
 			<TransactionsList
-				transactions={data.transactions.map(tx => (typeof tx === "string" ? { hash: tx } : tx))}
+				transactions={data.transactions.map((tx) => (typeof tx === 'string' ? { hash: tx } : tx))}
 				nativeSymbol={data.nativeSymbol}
 				showPagination={false}
 				class="!p-0"

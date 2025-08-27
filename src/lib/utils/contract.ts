@@ -3,8 +3,7 @@ import { ethers } from 'ethers';
 
 export const getContractData = async (address: string) => {
 	try {
-		return await fetch(`/api/contract/${address}`)
-			.then((res) => res.json())
+		return await fetch(`/api/contract/${address}`).then((res) => res.json());
 	} catch {
 		/**/
 	}
@@ -66,7 +65,7 @@ export const determineFragmentOutputType = (rawBytes: any) => {
 
 /** Detect proxy contract **/
 export const isContractProxy = (iface: ethers.Interface) => {
-	const fragments = Array(iface?.fragments)[0]
-	const isProxy = fragments.find((frag: any) => frag.name === 'implementation')
-	return !!isProxy
-}
+	const fragments = Array(iface?.fragments)[0];
+	const isProxy = fragments.find((frag: any) => frag.name === 'implementation');
+	return !!isProxy;
+};

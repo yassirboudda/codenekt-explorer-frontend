@@ -11,7 +11,6 @@
 		<div class="label mt-1 mb-auto">Logs</div>
 
 		<div class="tabs-border relative tabs w-full rounded-xl bg-base-200 p-2">
-
 			<input type="radio" name="logs_tabs" class="tab" aria-label="Raw" checked />
 			<div class="tab-content">
 				<ClipboardCopyBtn
@@ -76,9 +75,7 @@
 				<input type="radio" name="logs_tabs" class="tab" aria-label="Decoded" />
 				<div class="tab-content"></div>
 			{/if}
-
 		</div>
-
 	</div>
 {/if}
 

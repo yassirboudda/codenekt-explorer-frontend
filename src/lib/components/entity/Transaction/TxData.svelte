@@ -3,15 +3,13 @@
 	import ClipboardCopyBtn from '$lib/components/utilities/ClipboardCopyBtn.svelte';
 
 	export let tx;
-	export let isLoading = true;
 
 	let params: string[] = [];
 
 	let decodedData = '';
-	let txMethod = tx.method;
 	let error = false;
 
-	const arrayToString = (arr: any[], prefix = true) => {
+	/*const arrayToString = (arr: any[], prefix = true) => {
 		let str = '';
 		for (const [k, v] of Object.entries(arr)) {
 			if (prefix) str += `[${k}] `;
@@ -23,14 +21,11 @@
 			}
 		}
 		return str;
-	};
+	};*/
 
-	$: if(!isLoading) {
-		decodedData = ''
-		if(txMethod) decodedData += `Function: ${txMethod}\n\n`;
-		decodedData += `MethodID: ${tx?.data?.slice(0, 10)}\n\n`;
-		if(params.length) decodedData += arrayToString(params);
-	}
+	/*if (txMethod) decodedData += `Function: ${txMethod}\n\n`;
+	decodedData += `MethodID: ${tx?.data?.slice(0, 10)}\n\n`;
+	if (params.length) decodedData += arrayToString(params);*/
 </script>
 
 {#if tx?.data?.length > 2}
@@ -42,29 +37,18 @@
 				{#if tx.data}
 					<ClipboardCopyBtn value={tx.data} wrapperClass="absolute top-2 right-2" />
 				{/if}
-				<textarea
-					class="textarea"
-					use:TextareaAutosize
-					readonly
-				>{tx.data ?? 'No data found for this transaction'}</textarea>
+				<textarea class="textarea" use:TextareaAutosize readonly
+					>{tx.data ?? 'No data found for this transaction'}</textarea
+				>
 			</div>
 
-			{#if isLoading}
-				<div class="tab px-8">
-					<div class="loading loading-xs loading-dots"></div>
-				</div>
-			{:else if params?.length && error === false}
+			{#if params?.length && error === false}
 				<input type="radio" name="data_tabs" class="tab" aria-label="Decoded" />
 				<div class="tab-content">
 					<ClipboardCopyBtn value={decodedData} wrapperClass="absolute top-2 right-2" />
-					<textarea
-						class="textarea"
-						use:TextareaAutosize
-						readonly
-					>{decodedData}</textarea>
+					<textarea class="textarea" use:TextareaAutosize readonly>{decodedData}</textarea>
 				</div>
 			{/if}
-
 		</div>
 	</div>
 {/if}

@@ -4,14 +4,14 @@ import type { RequestHandler } from './$types';
 // import { json } from '@sveltejs/kit';
 // import {ethers} from "ethers";
 // import {ETHERSCAN_API_KEY} from "$env/static/private";
-import api from "$lib/server/api";
+import api from '$lib/server/api';
 
 export const GET: RequestHandler = async ({ params }) => {
 	// const provider = new ethers.JsonRpcProvider(PUBLIC_RPC_URL);
 	// const network = await provider.getNetwork();
 	// const chainId = Number(network.chainId);
 
-	return api.resolveEntity(params.address)
+	return api.resolveEntity(params.address);
 
 	/*try {
 		const fetchSourcifyData = async () => {
@@ -40,5 +40,4 @@ export const GET: RequestHandler = async ({ params }) => {
 		console.error('[sourcify error]', e)
 		return json({})
 	}*/
-
 };

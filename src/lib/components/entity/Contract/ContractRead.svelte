@@ -6,13 +6,10 @@
 	export let latestBlock = 0;
 
 	$: operations = entity?.abi?.filter(
-		(item: any) => (item.stateMutability === 'view' || item.stateMutability === 'pure') && item.type === 'function'
-	)
+		(item: any) =>
+			(item.stateMutability === 'view' || item.stateMutability === 'pure') &&
+			item.type === 'function'
+	);
 </script>
 
-<ContractOperations
-	{entity}
-	{latestBlock}
-	{operations}
-	{isLoading}
-/>
+<ContractOperations {entity} {latestBlock} {operations} {isLoading} />

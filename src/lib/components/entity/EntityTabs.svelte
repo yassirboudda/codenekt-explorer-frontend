@@ -14,28 +14,27 @@
 	export let latestBlock = 0;
 	export let isContract = false;
 
-	let isProxy = entity?.proxyResolution?.isProxy
+	let isProxy = entity?.proxyResolution?.isProxy;
 
 	$: tabs = [
 		{ icon: TxIcon, label: `Transactions (${page?.data?.total ?? 0})` },
-		...(isContract ? [
-			{ icon: CodeIcon, label: 'Code' },
-		] : []),
-		...(isContract && entity?.abi ? [
-			{ icon: ReadIcon, label: 'Read' },
-			{ icon: WriteIcon, label: 'Write' },
-		] : []),
-		...(isContract && isProxy ? [
-			{ icon: ReadIcon, label: 'Read as proxy' },
-			{ icon: WriteIcon, label: 'Write as proxy' },
-		] : [])
+		...(isContract ? [{ icon: CodeIcon, label: 'Code' }] : []),
+		...(isContract && entity?.abi
+			? [
+					{ icon: ReadIcon, label: 'Read' },
+					{ icon: WriteIcon, label: 'Write' }
+				]
+			: []),
+		...(isContract && isProxy
+			? [
+					{ icon: ReadIcon, label: 'Read as proxy' },
+					{ icon: WriteIcon, label: 'Write as proxy' }
+				]
+			: [])
 	];
 </script>
 
-<Tabs
-	tabClass="text-lg"
-	{tabs}
->
+<Tabs tabClass="text-lg" {tabs}>
 	<svelte:fragment slot="content" let:tab>
 		{#if tab === 0}
 			<TransactionsList
@@ -52,10 +51,9 @@
 		{:else if tab === 3}
 			<ContractWrite {entity} {latestBlock} />
 		{:else if tab === 4}
-			<!-- @TODO Load proxy implementation -->
-			<!--<ContractRead entity={{ ...page.data.entity.proxy, address: entity.address }} {latestBlock} />-->
+			<ContractRead entity={{ ...page.data.entity.proxies[0], address: entity.address }} {latestBlock} />
 		{:else if tab === 5}
-			<!--<ContractWrite entity={{ ...page.data.entity.proxy, address: entity.address }} {latestBlock} />-->
+			<ContractWrite entity={{ ...page.data.entity.proxies[0], address: entity.address }} {latestBlock} />
 		{/if}
 	</svelte:fragment>
 </Tabs>

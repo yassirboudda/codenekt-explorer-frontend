@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PUBLIC_SOURCIFY_URL } from '$env/static/public'
+	import { PUBLIC_SOURCIFY_URL } from '$env/static/public';
 	import Code from '$lib/components/utilities/Code.svelte';
 	import ClipboardCopyBtn from '$lib/components/utilities/ClipboardCopyBtn.svelte';
 
@@ -11,7 +11,7 @@
 	<div class="section">
 		<div class="row text-base-content/50">
 			<span>Contract is not verified yet. Owner? You can</span>
-			<a href="{PUBLIC_SOURCIFY_URL}" target="_blank" class="text-primary">Verify & publish</a>
+			<a href={PUBLIC_SOURCIFY_URL} target="_blank" class="text-primary">Verify & publish</a>
 			<span>your contract</span>
 		</div>
 	</div>
@@ -20,7 +20,6 @@
 {#if isLoading}
 	<div class="h-64 w-full skeleton rounded-2xl p-2"></div>
 {:else if entity}
-
 	{#if entity?.compilation?.name || entity?.compilation?.compilerVersion || entity?.compilation?.compilerSettings?.optimizer?.enabled}
 		<div class="section">
 			{#if entity?.compilation?.name}

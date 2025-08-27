@@ -48,7 +48,7 @@
 }
 
 @utility input {
-	@apply !rounded-lg !shadow-none !outline-0 !border-0;
+	@apply !rounded-lg !border-0 !shadow-none !outline-0;
 	@apply !rounded-lg !bg-base-200;
 	&:active,
 	&:focus,
@@ -62,7 +62,7 @@
 }
 
 @utility input-prefix {
-	@apply flex min-w-1/2 sm:min-w-46 items-center p-2 px-4;
+	@apply flex min-w-1/2 items-center p-2 px-4 sm:min-w-46;
 }
 
 @utility textarea {

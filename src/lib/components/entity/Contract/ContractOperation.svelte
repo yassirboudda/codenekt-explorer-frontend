@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ethers } from 'ethers';
-	import {provider, wallet} from '$lib/stores';
+	import { provider, wallet } from '$lib/stores';
 	import Address from '$lib/components/entity/common/Address.svelte';
 
 	export let operation: any;
@@ -11,7 +11,7 @@
 	let inputsValues: { [name: string]: any } = {
 		blockTag: latestBlock
 	};
-	$:if(latestBlock) {
+	$: if (latestBlock) {
 		inputsValues.blockTag = latestBlock;
 	}
 	let isReadonly = operation?.stateMutability === 'view' || operation?.stateMutability === 'pure';
@@ -28,7 +28,6 @@
 			let providerOrSigner: JsonRpcProvider | JsonRpcSigner = $provider;
 
 			try {
-
 				if (!isReadonly) {
 					const Wallet = await wallet.connect();
 					if (Wallet.signer) {
@@ -40,14 +39,14 @@
 				blockTag = blockTag ? Number(blockTag) : 'latest';
 
 				const Contract: any = contract.connect(providerOrSigner);
-				const method: any = Contract[operation.name]
+				const method: any = Contract[operation.name];
 
 				if (method) {
 					const tx = await method(...Object.values(inputs), { blockTag });
-					if(isReadonly) {
-						result = tx
+					if (isReadonly) {
+						result = tx;
 					}
-					if(!isReadonly) {
+					if (!isReadonly) {
 						// @TODO Decode output
 					}
 				} else {
@@ -58,7 +57,7 @@
 				isLoading = false;
 			}
 		} else {
-			console.error('Contract is not defined')
+			console.error('Contract is not defined');
 		}
 		isLoading = false;
 	};
@@ -66,26 +65,31 @@
 
 <div class="flex flex-col gap-2">
 	<div class="join flex w-full gap-8">
-		<span class="input-prefix join-item pl-2">Block number</span>
+		<span class="join-item input-prefix pl-2">Block number</span>
 		<label class="input join-item w-full">
 			<input type="text" class="grow" bind:value={inputsValues.blockTag} disabled={isLoading} />
 		</label>
 	</div>
 	{#each operation.inputs as input}
 		<div class="join flex w-full gap-8">
-			<div class="input-prefix join-item pl-2">
+			<div class="join-item input-prefix pl-2">
 				<span>{input.name}</span>
 				{#if input.type}
 					<span>&nbsp;({input.type})</span>
 				{/if}
 			</div>
 			<label class="input join-item w-full">
-				<input type="text" class="grow" bind:value={inputsValues[input.name]} disabled={isLoading} />
+				<input
+					type="text"
+					class="grow"
+					bind:value={inputsValues[input.name]}
+					disabled={isLoading}
+				/>
 			</label>
 		</div>
 	{/each}
 	<button
-		class="btn mr-auto px-16 mx-2 !rounded-lg btn-sm btn-primary"
+		class="btn mx-2 mr-auto !rounded-lg px-16 btn-sm btn-primary"
 		disabled={isLoading}
 		on:click={call}
 	>
@@ -104,7 +108,7 @@
 				<div class="h-10 w-[420px] max-w-full skeleton"></div>
 			{:else if result}
 				<div class="join flex w-full gap-8">
-					<span class="input-prefix join-item pl-2">Result</span>
+					<span class="join-item input-prefix pl-2">Result</span>
 					<div class="join-item w-full">
 						{#if Array.isArray(result)}
 							{#if String(result[i]).startsWith('0x')}

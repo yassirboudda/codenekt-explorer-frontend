@@ -1,5 +1,6 @@
 <script lang="ts">
 	import moment from 'moment';
+	import {page} from "$app/state";
 	import { formatAddress, formatNumber, getTransactionMethod } from '$lib/utils';
 	import ClipboardCopyBtn from '$lib/components/utilities/ClipboardCopyBtn.svelte';
 
@@ -10,7 +11,6 @@
 
 	export let tx;
 	export let i = 0;
-	export let nativeSymbol = 'ETH';
 	export let highlightAddress = '';
 
 	$: txMethod = getTransactionMethod(tx);
@@ -61,7 +61,7 @@
 	{#if typeof tx.value !== 'undefined'}
 		<div class="badge">
 			<span>{formatNumber(tx.value / 10 ** 18)}</span>
-			<span>{nativeSymbol}</span>
+			<span>{page.data.nativeSymbol ?? 'ETH'}</span>
 		</div>
 	{/if}
 	<div class="icon !p-1">

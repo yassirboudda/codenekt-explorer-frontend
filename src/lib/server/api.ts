@@ -1,5 +1,5 @@
 import { EXPLORER_API_URL } from '$env/static/private';
-import {calculateTotalPages} from "$lib/server/pagination";
+import { calculateTotalPages } from '$lib/server/pagination';
 
 type Params = { [k: string]: string | number | boolean };
 
@@ -53,7 +53,7 @@ const api = {
 				transactions: [],
 				total: 0,
 				totalPages: 1
-			}))
+			}));
 	},
 
 	getTransaction: async (hash: string) => {
@@ -66,6 +66,6 @@ const api = {
 
 	getTransactionsChart: async (params: Params = {}) => {
 		return await api.request('/transactions/chart', params);
-	},
+	}
 };
 export default api;

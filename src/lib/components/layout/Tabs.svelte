@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type {Component} from "svelte";
+	import type { Component } from 'svelte';
 	import { page } from '$app/state';
 
 	export let tabs: {
@@ -9,12 +9,12 @@
 	}[] = [];
 	export let tabClass = '';
 
-	let pageHash = page.url.hash
+	let pageHash = page.url.hash;
 
-	let activeTab = 0
+	let activeTab = 0;
 	$: activeTab = tabs.findIndex((t) => {
-		return t.label.toLowerCase().replaceAll(' ', '-') === pageHash.toLowerCase().replace('#', '')
-	})
+		return t.label.toLowerCase().replaceAll(' ', '-') === pageHash.toLowerCase().replace('#', '');
+	});
 </script>
 
 <div class="flex w-full gap-2 overflow-auto">
@@ -26,8 +26,10 @@
 				</div>
 			{:else}
 				<a
-					href={i === 0 ? page.url.pathname : `#${tab?.hash ?? tab?.label?.toLowerCase()?.replaceAll(' ', '-')}`}
-					class="flex items-center gap-3 cursor-pointer rounded-xl bg-base-100 p-2 px-4 whitespace-nowrap hover:bg-base-300 {tabClass}"
+					href={i === 0
+						? page.url.pathname
+						: `#${tab?.hash ?? tab?.label?.toLowerCase()?.replaceAll(' ', '-')}`}
+					class="flex cursor-pointer items-center gap-3 rounded-xl bg-base-100 p-2 px-4 whitespace-nowrap hover:bg-base-300 {tabClass}"
 					class:bg-base-300={Math.max(0, activeTab) === i}
 					on:click={() => (activeTab = i)}
 				>
