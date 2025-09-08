@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { PUBLIC_FULLY_INDEXED } from '$env/static/public'
 	import BlocksNumberStat from '$lib/components/home/BlocksNumberStat.svelte';
 	import TxsNumberStat from '$lib/components/home/TxsNumberStat.svelte';
 	import GasPriceStat from '$lib/components/home/GasPriceStat.svelte';
@@ -8,6 +7,7 @@
 	import LatestBlocksList from '$lib/components/home/LatestBlocksList.svelte';
 	import LatestTxsList from '$lib/components/home/LatestTxsList.svelte';
 	import InfoIcon from 'virtual:icons/hugeicons/information-square'
+	import {isFullyIndexed} from "$lib/utils";
 
 	export let data;
 </script>
@@ -16,7 +16,7 @@
 	<title>AMI Blockchain Explorer</title>
 </svelte:head>
 
-{#if PUBLIC_FULLY_INDEXED !== '0'}
+{#if isFullyIndexed()}
 	<div class="container mx-4 grid grid-cols-1 md:grid-cols-6 xl:grid-cols-12">
 		<div class="col-span-4 flex w-full flex-col gap-2 rounded-xl bg-base-200">
 			<GasPriceStat />
