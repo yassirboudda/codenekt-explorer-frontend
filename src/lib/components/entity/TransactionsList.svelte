@@ -1,6 +1,8 @@
 <script lang="ts">
+	import {PUBLIC_FULLY_INDEXED} from "$env/static/public";
 	import DataList from '$lib/components/data/DataList.svelte';
 	import DataListItem_Transaction from '$lib/components/data/DataListItem_Transaction.svelte';
+	import InfoIcon from 'virtual:icons/hugeicons/information-square'
 
 	export let isLoading = false;
 	export let transactions: any[] = [];
@@ -16,6 +18,12 @@
 {#if isLoading}
 	<div class="h-42 w-full skeleton"></div>
 {:else}
+	{#if PUBLIC_FULLY_INDEXED === '0'}
+		<div class="container flex items-center px-2 my-2">
+			<InfoIcon class="text-xl min-w-10" />
+			<span>This explorer is not fully indexed, which means the following transaction list may be outdated.</span>
+		</div>
+	{/if}
 	<DataList
 		class={className}
 		items={transactions}

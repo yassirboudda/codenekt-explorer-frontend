@@ -8,6 +8,6 @@
 			<img src="/logo.png" alt="Logo" height="42" width="42" />
 			<span class="text-lg font-medium">Blockchain Explorer</span>
 		</a>
-		<!--		<Searchbar class="ml-auto min-w-1/3" />-->
+		<Searchbar class="ml-auto min-w-1/3" />
 	</div>
 </div>
