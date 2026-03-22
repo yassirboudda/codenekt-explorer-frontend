@@ -14,13 +14,13 @@ export const load: PageServerLoad = async ({ url }) => {
 			txs: transactions,
 			total,
 			totalPages: calculateTotalPages(total, limit),
-			nativeSymbol: process.env.NATIVE_SYMBOL || 'ETH'
+			nativeSymbol: process.env.NATIVE_SYMBOL || 'CDK'
 		};
 	} catch {
 		return {
 			txs: [],
 			totalPages: 0,
-			nativeSymbol: process.env.NATIVE_SYMBOL || 'ETH'
+			nativeSymbol: process.env.NATIVE_SYMBOL || 'CDK'
 		};
 	}
 };

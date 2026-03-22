@@ -28,8 +28,8 @@
 
 {#if visible}
 	<div
-		class="fixed top-0 left-0 z-[60] h-[4px] max-w-full bg-[#ff154e]"
+		class="fixed top-0 left-0 z-[60] h-[3px] max-w-full"
 		out:fade
-		style="width:{progression}%"
+		style="width:{progression}%; background: linear-gradient(90deg, #e52020, #ff7000);"
 	></div>
 {/if}

@@ -12,9 +12,9 @@
 	<link rel="icon" href="/favicon.svg" />
 </svelte:head>
 
-<div class="flex min-h-screen w-screen flex-col">
+<div class="app-shell">
 	<Header />
-	<div class="main-content-wrapper flex flex-1 flex-col gap-4 px-1 py-2 sm:py-4">
+	<div class="main-content-wrapper">
 		{@render children?.()}
 	</div>
 	<Footer />
@@ -25,7 +25,15 @@
 
 <style lang="postcss">
 	@reference "$lib/../app.css";
+	.app-shell {
+		@apply flex min-h-screen w-screen flex-col;
+		background: #08080e;
+	}
 	.main-content-wrapper {
-		min-height: calc(100vh - calc(var(--spacing) * 8));
+		@apply flex flex-1 flex-col gap-4 px-2 py-3 sm:py-5 sm:px-4;
+		min-height: calc(100vh - 4rem);
+		max-width: 1400px;
+		margin: 0 auto;
+		width: 100%;
 	}
 </style>

@@ -48,20 +48,20 @@
 	<div class="mr-auto ml-8 flex items-center gap-8">
 		{#if tx.from?.length}
 			<ClipboardCopyBtn value={tx.from}>
-				<span class:text-blue-500={highlightAddress === tx.from}>{formatAddress(tx.from, 8)}</span>
+				<span class:text-red-400={highlightAddress === tx.from}>{formatAddress(tx.from, 8)}</span>
 			</ClipboardCopyBtn>
 		{/if}
 		{#if tx.to?.length}
 			<RightArrowIcon />
 			<ClipboardCopyBtn value={tx.to}>
-				<span class:text-blue-500={highlightAddress === tx.to}>{formatAddress(tx.to, 8)}</span>
+				<span class:text-red-400={highlightAddress === tx.to}>{formatAddress(tx.to, 8)}</span>
 			</ClipboardCopyBtn>
 		{/if}
 	</div>
 	{#if typeof tx.value !== 'undefined'}
 		<div class="badge">
 			<span>{formatNumber(tx.value / 10 ** 18)}</span>
-			<span>{page.data.nativeSymbol ?? 'ETH'}</span>
+			<span>{page.data.nativeSymbol ?? 'CDK'}</span>
 		</div>
 	{/if}
 	<div class="icon !p-1">

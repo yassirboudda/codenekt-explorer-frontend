@@ -6,7 +6,7 @@
 
 	export let isLoading = false;
 	export let transactions: any[] = [];
-	export let nativeSymbol: string = 'ETH';
+	export let nativeSymbol: string = 'CDK';
 	export let highlightAddress: string = '';
 	export let totalPages: number = 1;
 	export let showPagination: boolean = true;

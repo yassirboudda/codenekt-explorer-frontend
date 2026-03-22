@@ -5,5 +5,5 @@ export * from '$lib/utils/transaction';
 export * from '$lib/utils/contract';
 
 export const isFullyIndexed = () => {
-	return PUBLIC_RPC_URL !== 'https://api.avax.network/ext/bc/C/rpc'
+	return PUBLIC_RPC_URL !== 'https://rpc1.codenekt-ecosystem.io/'
 }

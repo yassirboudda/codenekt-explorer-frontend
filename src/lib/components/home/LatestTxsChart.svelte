@@ -3,6 +3,7 @@
 	import {
 		CategoryScale,
 		Chart,
+		Filler,
 		LinearScale,
 		LineController,
 		LineElement,
@@ -12,7 +13,7 @@
 	import { onDestroy, onMount, tick } from 'svelte';
 	import numeral from 'numeral';
 
-	Chart.register(CategoryScale, LinearScale, LineElement, PointElement, LineController, Tooltip);
+	Chart.register(CategoryScale, Filler, LinearScale, LineElement, PointElement, LineController, Tooltip);
 
 	let canvas: HTMLCanvasElement;
 	let myChart: Chart<'line'> | null = null;
@@ -76,9 +77,10 @@
 					{
 						label: 'Transaction Count',
 						data: chartData,
-						borderColor: '#3B82F6',
+						borderColor: '#e52020',
 						borderWidth: 2,
-						fill: false,
+						fill: true,
+						backgroundColor: 'rgba(229, 32, 32, 0.08)',
 						pointRadius: 0,
 						pointHoverRadius: 4,
 						tension: 0.1
@@ -213,6 +215,17 @@
 	});
 </script>
 
-<div class="h-full w-full rounded-xl bg-base-100">
+<div class="chart-wrapper">
 	<canvas bind:this={canvas} width="400" height="200"></canvas>
 </div>
+
+<style>
+	.chart-wrapper {
+		height: 100%;
+		width: 100%;
+		border-radius: 0.75rem;
+		background: rgba(17, 17, 25, 0.5);
+		border: 1px solid rgba(255, 255, 255, 0.04);
+		padding: 0.5rem;
+	}
+</style>

@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ params }) => {
 			block: data,
 			transactions: data.transactions,
 			kind,
-			nativeSymbol: process.env.NATIVE_SYMBOL || 'ETH'
+			nativeSymbol: process.env.NATIVE_SYMBOL || 'CDK'
 		};
 	} catch (e: any) {
 		if (e.status >= 300 && e.status <= 399) {
@@ -19,7 +19,7 @@ export const load: PageServerLoad = async ({ params }) => {
 			block: null,
 			kind: null,
 			transactions: [],
-			nativeSymbol: process.env.NATIVE_SYMBOL || 'ETH'
+			nativeSymbol: process.env.NATIVE_SYMBOL || 'CDK'
 		};
 	}
 };

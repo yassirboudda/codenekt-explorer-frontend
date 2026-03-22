@@ -13,7 +13,8 @@
 </script>
 
 <svelte:head>
-	<title>AMI Blockchain Explorer</title>
+	<title>CodeNekt L1 Explorer</title>
+	<meta name="description" content="CodeNekt L1 Blockchain Explorer - Explore blocks, transactions, and addresses on the CodeNekt L1 network." />
 </svelte:head>
 
 {#if isFullyIndexed()}
@@ -63,13 +64,23 @@
 	@reference "$lib/../app.css";
 	.container {
 		@apply gap-2 p-2;
-		@apply mx-auto rounded-2xl bg-base-200;
+		@apply mx-auto rounded-2xl;
+		background: rgba(17, 17, 25, 0.4);
+		border: 1px solid rgba(255, 255, 255, 0.04);
 	}
 	.list-col {
 		@apply flex h-full w-full flex-col gap-2;
 		> .title {
 			@apply flex items-center gap-2 p-4 pl-6;
-			@apply rounded-xl bg-base-100 text-2xl font-medium;
+			@apply rounded-xl text-xl font-semibold tracking-tight;
+			background: rgba(17, 17, 25, 0.5);
+			border: 1px solid rgba(255, 255, 255, 0.04);
+			span {
+				background: linear-gradient(135deg, #e8e8f0 0%, rgba(232,232,240,0.6) 100%);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				background-clip: text;
+			}
 		}
 	}
 </style>

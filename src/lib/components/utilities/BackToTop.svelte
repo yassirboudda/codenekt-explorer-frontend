@@ -14,9 +14,33 @@
 <svelte:window on:scroll={() => (scrollY = window.scrollY)} />
 
 <button
-	class="fixed right-4 bottom-4 flex cursor-pointer items-center justify-center rounded-2xl bg-black p-2"
+	class="back-to-top"
 	class:hidden={scrollY <= 1}
 	on:click={scrollToTop}
 >
 	<ChevronUpIcon class="text-2xl" />
 </button>
+
+<style>
+	.back-to-top {
+		position: fixed;
+		right: 1rem;
+		bottom: 1rem;
+		display: flex;
+		cursor: pointer;
+		align-items: center;
+		justify-content: center;
+		border-radius: 1rem;
+		padding: 0.5rem;
+		background: rgba(17, 17, 25, 0.8);
+		backdrop-filter: blur(8px);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		transition: all 0.2s ease;
+		color: rgba(232, 232, 240, 0.6);
+	}
+	.back-to-top:hover {
+		background: rgba(229, 32, 32, 0.15);
+		border-color: rgba(229, 32, 32, 0.3);
+		color: #e52020;
+	}
+</style>

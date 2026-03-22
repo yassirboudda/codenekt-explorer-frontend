@@ -1,10 +1,119 @@
 @import 'tailwindcss';
-@plugin 'daisyui';
+@plugin 'daisyui' {
+	@theme dark --default {
+		--color-base-100: #111119;
+		--color-base-200: #0c0c14;
+		--color-base-300: #08080e;
+		--color-base-content: #e8e8f0;
+		--color-primary: #e52020;
+		--color-secondary: #ff7000;
+		--color-accent: #ff4500;
+		--color-neutral: #151520;
+		--color-info: #3abff8;
+		--color-success: #22c55e;
+		--color-warning: #f59e0b;
+		--color-error: #ef4444;
+	}
+}
+
+/** Google Fonts **/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+	font-family: 'Inter', system-ui, -apple-system, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/** Global enhancements **/
+
+body {
+	background: #08080e;
+	background-image:
+		radial-gradient(ellipse 80% 60% at 50% -20%, rgba(229, 32, 32, 0.08), transparent),
+		radial-gradient(ellipse 60% 40% at 80% 0%, rgba(255, 112, 0, 0.05), transparent);
+	background-attachment: fixed;
+}
+
+/** Gradient accent utilities **/
+.gradient-text {
+	background: linear-gradient(135deg, #e52020, #ff7000);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.gradient-border {
+	border: 1px solid transparent;
+	background-clip: padding-box;
+	position: relative;
+}
+.gradient-border::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	padding: 1px;
+	background: linear-gradient(135deg, rgba(229, 32, 32, 0.3), rgba(255, 112, 0, 0.15));
+	-webkit-mask:
+		linear-gradient(#fff 0 0) content-box,
+		linear-gradient(#fff 0 0);
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	pointer-events: none;
+}
+
+.glass-card {
+	background: rgba(17, 17, 25, 0.7);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-card-hover:hover {
+	background: rgba(21, 21, 32, 0.85);
+	border-color: rgba(229, 32, 32, 0.15);
+}
+
+/** Scrollbar styling **/
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+::-webkit-scrollbar-track {
+	background: #08080e;
+}
+::-webkit-scrollbar-thumb {
+	background: #2a2a3a;
+	border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #3a3a4a;
+}
+
+/** Selection highlight **/
+::selection {
+	background: rgba(229, 32, 32, 0.3);
+	color: #fff;
+}
+
+/** Skeleton override **/
+.skeleton {
+	background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 75%);
+	background-size: 200% 100%;
+	animation: skeleton-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+	0% { background-position: 200% 0; }
+	100% { background-position: -200% 0; }
+}
 
 /** Daisyui overrides **/
 
 @utility btn {
 	@apply border-0 shadow-none outline-none;
+	@apply transition-all duration-200;
 	&:not(.join-item) {
 		@apply rounded-full;
 	}
@@ -12,6 +121,15 @@
 		@apply px-4;
 		height: calc(var(--size) + (0.25rem * 2));
 		--radius-field: 100px;
+	}
+	&.btn-primary, &.btn-gradient {
+		background: linear-gradient(135deg, #e52020, #ff7000);
+		color: #fff;
+		border: none;
+		&:hover {
+			background: linear-gradient(135deg, #cc1a1a, #e06000);
+			box-shadow: 0 0 20px rgba(229, 32, 32, 0.3);
+		}
 	}
 }
 
@@ -29,17 +147,29 @@
 	border-block-end: initial !important;
 	border-inline-end: initial !important;
 	@apply !flex w-full items-center sm:gap-8;
-	@apply rounded-xl bg-base-100 !px-2 sm:!px-6;
+	@apply rounded-xl !px-2 sm:!px-6;
+	background: rgba(17, 17, 25, 0.6);
+	backdrop-filter: blur(8px);
+	border: 1px solid rgba(255, 255, 255, 0.05);
+	transition: all 0.2s ease;
 	&:is(a):hover {
-		@apply bg-base-300;
+		background: rgba(21, 21, 32, 0.8);
+		border-color: rgba(229, 32, 32, 0.2);
+	}
+
+	.stat-title {
+		@apply text-sm uppercase tracking-wider;
+		color: rgba(232, 232, 240, 0.5);
 	}
 
 	.stat-value {
 		font-size: clamp(24px, 4vw, 32px);
+		@apply font-semibold;
 	}
 
 	& > svg {
 		min-width: 50px;
+		color: #e52020;
 	}
 
 	.content {
@@ -49,12 +179,14 @@
 
 @utility input {
 	@apply !rounded-lg !border-0 !shadow-none !outline-0;
-	@apply !rounded-lg !bg-base-200;
+	background: rgba(17, 17, 25, 0.6) !important;
+	border: 1px solid rgba(255, 255, 255, 0.06) !important;
 	&:active,
 	&:focus,
 	&:focus-within,
 	&:focus-visible {
 		--input-color: color-mix(in oklab, var(--color-base-content) 60%, #0000);
+		border-color: rgba(229, 32, 32, 0.3) !important;
 	}
 }
 @utility select {
@@ -73,7 +205,10 @@
 
 @utility modal {
 	.modal-box {
-		@apply rounded-2xl bg-base-200 p-2;
+		@apply rounded-2xl p-2;
+		background: rgba(12, 12, 20, 0.95);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		backdrop-filter: blur(20px);
 	}
 }
 
@@ -87,9 +222,9 @@
 			@apply p-1;
 			.btn {
 				@apply !rounded-sm;
-				@apply bg-base-200;
+				background: rgba(12, 12, 20, 0.5);
 				&:hover {
-					@apply bg-base-100;
+					background: rgba(21, 21, 32, 0.8);
 				}
 			}
 		}
@@ -99,14 +234,19 @@
 /** Custom utils **/
 
 @utility page-content {
-	@apply container mx-auto flex flex-col gap-2 rounded-2xl bg-base-200 p-2;
+	@apply container mx-auto flex flex-col gap-2 rounded-2xl p-2;
+	background: rgba(12, 12, 20, 0.6);
+	backdrop-filter: blur(8px);
+	border: 1px solid rgba(255, 255, 255, 0.04);
 
 	.content {
 		@apply flex flex-col gap-2 rounded-2xl;
 	}
 
 	.section {
-		@apply flex flex-col rounded-xl bg-base-100 p-2;
+		@apply flex flex-col rounded-xl p-2;
+		background: rgba(17, 17, 25, 0.7);
+		border: 1px solid rgba(255, 255, 255, 0.05);
 		&:empty {
 			@apply !hidden;
 		}
@@ -118,12 +258,16 @@
 			@apply flex-col md:flex-row;
 			.label {
 				@apply ml-2 min-w-42 sm:ml-0;
+				color: rgba(232, 232, 240, 0.5);
 			}
 			.value {
-				@apply badge h-auto min-h-10 bg-base-200 badge-lg;
+				@apply badge h-auto min-h-10 badge-lg;
+				background: rgba(12, 12, 20, 0.5);
+				border: 1px solid rgba(255, 255, 255, 0.04);
 				@apply max-w-full leading-4;
 				&:is(a, button):hover {
-					@apply bg-base-300;
+					background: rgba(21, 21, 32, 0.8);
+					border-color: rgba(229, 32, 32, 0.15);
 				}
 			}
 
@@ -142,7 +286,8 @@
 @utility home-list {
 	@apply flex flex-1 flex-col rounded-xl;
 	@apply sm:p-2;
-	@apply sm:bg-base-100;
+	background: rgba(17, 17, 25, 0.5);
+	border: 1px solid rgba(255, 255, 255, 0.04);
 	@apply gap-2 sm:gap-0;
 
 	> .list-item {
@@ -157,7 +302,9 @@
 
 	.header,
 	.footer {
-		@apply flex flex-wrap items-center gap-2 rounded-xl bg-base-100 p-2 px-4;
+		@apply flex flex-wrap items-center gap-2 rounded-xl p-2 px-4;
+		background: rgba(17, 17, 25, 0.6);
+		border: 1px solid rgba(255, 255, 255, 0.05);
 	}
 	> .content {
 		@apply home-list overflow-auto;
@@ -166,20 +313,25 @@
 
 @utility list-item {
 	@apply relative !flex flex-row items-center p-2;
-	@apply rounded-xl bg-base-100 transition-all;
+	@apply rounded-xl transition-all;
 	list-style-type: none;
+	background: rgba(17, 17, 25, 0.4);
+	border: 1px solid transparent;
 
 	@apply gap-x-2 gap-y-2 sm:gap-x-4;
-	@apply bg-base-100 sm:bg-transparent;
+	@apply sm:bg-transparent;
 	@apply flex-wrap sm:flex-nowrap;
 
 	.icon {
-		@apply flex items-center justify-center rounded-xl bg-base-200 p-4;
-		@apply border-2 border-transparent transition-all;
+		@apply flex items-center justify-center rounded-xl p-4;
+		background: rgba(12, 12, 20, 0.5);
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		@apply transition-all;
 	}
 	.badge {
 		@apply !h-auto badge-lg;
-		@apply h-full bg-base-200 badge-lg;
+		background: rgba(12, 12, 20, 0.5);
+		border: 1px solid rgba(255, 255, 255, 0.04);
 		@apply overflow-hidden text-ellipsis whitespace-nowrap;
 	}
 	.badge,
@@ -203,10 +355,13 @@
 	&:not(.empty) {
 		&:hover,
 		&.active {
-			@apply bg-base-200;
-			.icon,
+			background: rgba(21, 21, 32, 0.7);
+			border-color: rgba(229, 32, 32, 0.1);
+			.icon {
+				border-color: rgba(229, 32, 32, 0.2);
+			}
 			.badge {
-				@apply bg-base-100;
+				background: rgba(17, 17, 25, 0.6);
 			}
 		}
 	}
