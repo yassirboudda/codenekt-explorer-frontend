@@ -58,16 +58,22 @@
 	}
 	.header-actions {
 		@apply flex items-center gap-2;
-		min-width: min(100%, 44rem);
-		width: 100%;
+		width: min(100%, 44rem);
 		max-width: 44rem;
+		flex-wrap: wrap;
+	}
+	.header-actions > :global(.searchbar-wrapper) {
+		flex: 1 1 70%;
+		min-width: 0;
 	}
 	.rpc-btn {
-		@apply inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200;
+		@apply inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium transition-all duration-200;
 		background: rgba(17, 17, 25, 0.72);
 		border: 1px solid rgba(255, 255, 255, 0.06);
 		color: rgba(232, 232, 240, 0.82);
 		white-space: nowrap;
+		min-width: 0;
+		justify-content: center;
 		&:hover {
 			border-color: rgba(229, 32, 32, 0.24);
 			background: rgba(229, 32, 32, 0.08);
@@ -76,7 +82,17 @@
 	}
 	@media (max-width: 768px) {
 		.header-actions {
-			max-width: none;
+			width: 100%;
+			max-width: 100%;
+			gap: 0.5rem;
+		}
+		.header-actions > :global(.searchbar-wrapper) {
+			flex: 1 1 100%;
+		}
+		.rpc-btn {
+			flex: 1 1 auto;
+			min-width: 120px;
+			justify-content: center;
 		}
 		.rpc-btn span {
 			display: none;
