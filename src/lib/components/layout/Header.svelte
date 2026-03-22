@@ -1,5 +1,18 @@
 <script lang="ts">
+	import { PUBLIC_RPC_URL } from '$env/static/public';
 	import Searchbar from '$lib/components/layout/Searchbar.svelte';
+	import CheckIcon from 'virtual:icons/hugeicons/checkmark-square-01';
+	import CopyIcon from 'virtual:icons/hugeicons/copy-01';
+
+	let isCopied = false;
+
+	const copyRpc = async () => {
+		await navigator.clipboard.writeText(PUBLIC_RPC_URL);
+		isCopied = true;
+		setTimeout(() => {
+			isCopied = false;
+		}, 1200);
+	};
 </script>
 
 <div class="header-nav">
@@ -8,7 +21,18 @@
 			<img src="/logo.png" alt="CodeNekt Logo" height="38" width="38" />
 			<span class="logo-text">CodeNekt <span class="gradient-text">Explorer</span></span>
 		</a>
-		<Searchbar class="ml-auto min-w-1/3" />
+		<div class="header-actions ml-auto">
+			<Searchbar class="min-w-1/3 flex-1" />
+			<button class="rpc-btn" on:click={copyRpc} title="Copy RPC URL">
+				{#if isCopied}
+					<CheckIcon class="text-lg" />
+					<span>Copied</span>
+				{:else}
+					<CopyIcon class="text-lg" />
+					<span>Copy RPC</span>
+				{/if}
+			</button>
+		</div>
 	</div>
 </div>
 
@@ -31,5 +55,31 @@
 	}
 	.logo-text {
 		@apply text-lg font-semibold tracking-tight;
+	}
+	.header-actions {
+		@apply flex items-center gap-2;
+		min-width: min(100%, 44rem);
+		width: 100%;
+		max-width: 44rem;
+	}
+	.rpc-btn {
+		@apply inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200;
+		background: rgba(17, 17, 25, 0.72);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		color: rgba(232, 232, 240, 0.82);
+		white-space: nowrap;
+		&:hover {
+			border-color: rgba(229, 32, 32, 0.24);
+			background: rgba(229, 32, 32, 0.08);
+			color: #fff;
+		}
+	}
+	@media (max-width: 768px) {
+		.header-actions {
+			max-width: none;
+		}
+		.rpc-btn span {
+			display: none;
+		}
 	}
 </style>
