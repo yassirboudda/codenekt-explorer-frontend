@@ -22,6 +22,7 @@
 			<span class="logo-text">CodeNekt <span class="gradient-text">Explorer</span></span>
 		</a>
 		<div class="header-actions ml-auto">
+			<a href="/validators-rewards" class="validators-link">Validators Rewards</a>
 			<Searchbar class="min-w-1/3 flex-1" />
 			<button class="rpc-btn" on:click={copyRpc} title="Copy RPC URL">
 				{#if isCopied}
@@ -66,6 +67,18 @@
 		flex: 1 1 70%;
 		min-width: 0;
 	}
+	.validators-link {
+		@apply inline-flex items-center rounded-full px-3 py-2 text-sm font-medium transition-all duration-200;
+		background: rgba(17, 17, 25, 0.72);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		color: rgba(232, 232, 240, 0.82);
+		white-space: nowrap;
+		&:hover {
+			border-color: rgba(229, 32, 32, 0.24);
+			background: rgba(229, 32, 32, 0.08);
+			color: #fff;
+		}
+	}
 	.rpc-btn {
 		@apply inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium transition-all duration-200;
 		background: rgba(17, 17, 25, 0.72);
@@ -89,7 +102,13 @@
 		.header-actions > :global(.searchbar-wrapper) {
 			flex: 1 1 100%;
 		}
+		.validators-link {
+			order: 2;
+			flex: 1 1 auto;
+			justify-content: center;
+		}
 		.rpc-btn {
+			order: 3;
 			flex: 1 1 auto;
 			min-width: 120px;
 			justify-content: center;

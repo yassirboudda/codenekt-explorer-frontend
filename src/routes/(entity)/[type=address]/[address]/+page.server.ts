@@ -5,13 +5,14 @@ import { calculateTotalPages, getPaginationParams } from '$lib/server/pagination
 
 export const load: PageServerLoad = async ({ params, url }) => {
 	const { skip, limit } = getPaginationParams(url);
-	const [entity, { transactions, total }] = await Promise.all([
+	const [entity, { transactions, total }, validatorRewards] = await Promise.all([
 		api.resolveEntity(params.address),
 		await api.getTransactions({
 			skip,
 			limit,
 			address: params.address
-		})
+		}),
+		api.getValidatorRewards(params.address, { limit: 25, skip: 0 })
 	]);
 
 	const urlPath = `/${entity.kind}/${params.address ?? ''}`;
@@ -24,6 +25,7 @@ export const load: PageServerLoad = async ({ params, url }) => {
 		kind: entity.kind,
 		transactions,
 		total,
-		totalPages: calculateTotalPages(total, limit)
+		totalPages: calculateTotalPages(total, limit),
+		validatorRewards
 	};
 };

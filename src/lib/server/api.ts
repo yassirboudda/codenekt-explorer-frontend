@@ -66,6 +66,19 @@ const api = {
 
 	getTransactionsChart: async (params: Params = {}) => {
 		return await api.request('/transactions/chart', params);
+	},
+
+	/** Validator rewards **/
+	getValidatorRewards: async (address: string, params: Params = {}) => {
+		const primary = await api.request(`/reward/validator/${address}`, params);
+		if (primary && Object.keys(primary).length) return primary;
+		return await api.request(`/rewardvalidator/${address}`, params);
+	},
+
+	getValidatorsRewards: async (params: Params = {}) => {
+		const primary = await api.request('/reward/validators', params);
+		if (primary && Object.keys(primary).length) return primary;
+		return await api.request('/rewardvalidators', params);
 	}
 };
 export default api;

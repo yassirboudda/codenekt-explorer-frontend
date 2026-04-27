@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import Tabs from '$lib/components/layout/Tabs.svelte';
 	import TransactionsList from '$lib/components/entity/TransactionsList.svelte';
+	import ValidatorRewardsList from '$lib/components/entity/ValidatorRewardsList.svelte';
 	import ContractSource from '$lib/components/entity/Contract/ContractSource.svelte';
 	import ContractRead from '$lib/components/entity/Contract/ContractRead.svelte';
 	import ContractWrite from '$lib/components/entity/Contract/ContractWrite.svelte';
@@ -15,9 +16,13 @@
 	export let isContract = false;
 
 	let isProxy = entity?.proxyResolution?.isProxy;
+	$: validatorRewards = page?.data?.validatorRewards ?? {};
+	$: hasValidatorRewards = Number(validatorRewards?.summary?.blocksProduced ?? 0) > 0;
+	$: baseContractTabIndex = hasValidatorRewards ? 2 : 1;
 
 	$: tabs = [
 		{ icon: TxIcon, label: `Transactions (${page?.data?.total ?? 0})` },
+		...(hasValidatorRewards ? [{ icon: TxIcon, label: 'Validator Rewards' }] : []),
 		...(isContract ? [{ icon: CodeIcon, label: 'Code' }] : []),
 		...(isContract && entity?.abi
 			? [
@@ -44,15 +49,17 @@
 				totalPages={page?.data?.totalPages}
 				class="!p-0"
 			/>
-		{:else if tab === 1}
+		{:else if hasValidatorRewards && tab === 1}
+			<ValidatorRewardsList rewards={validatorRewards} />
+		{:else if tab === baseContractTabIndex}
 			<ContractSource {entity} />
-		{:else if tab === 2}
+		{:else if tab === baseContractTabIndex + 1}
 			<ContractRead {entity} {latestBlock} />
-		{:else if tab === 3}
+		{:else if tab === baseContractTabIndex + 2}
 			<ContractWrite {entity} {latestBlock} />
-		{:else if tab === 4}
+		{:else if tab === baseContractTabIndex + 3}
 			<ContractRead entity={{ ...page.data.entity.proxies[0], address: entity.address }} {latestBlock} />
-		{:else if tab === 5}
+		{:else if tab === baseContractTabIndex + 4}
 			<ContractWrite entity={{ ...page.data.entity.proxies[0], address: entity.address }} {latestBlock} />
 		{/if}
 	</svelte:fragment>
