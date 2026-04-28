@@ -22,7 +22,6 @@
 			<span class="logo-text">CodeNekt <span class="gradient-text">Explorer</span></span>
 		</a>
 		<div class="header-actions ml-auto">
-			<a href="/validators-rewards" class="validators-link">Validators Rewards</a>
 			<Searchbar class="min-w-1/3 flex-1" />
 			<button class="rpc-btn" on:click={copyRpc} title="Copy RPC URL">
 				{#if isCopied}
