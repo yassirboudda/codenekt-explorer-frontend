@@ -26,6 +26,7 @@
 	onMount(updateCurrentPage);
 
 	const getUrl = (relative = 0, absolute = 0) => {
+		const targetUrl = new URL(page.url);
 		let p = current;
 		if (relative) {
 			p = Math.max(1, Math.min(total, current + relative));
@@ -33,12 +34,13 @@
 			p = absolute;
 		}
 		if (p === 1) {
-			page.url.searchParams.delete('p');
+			targetUrl.searchParams.delete('p');
 		} else {
-			page.url.searchParams.set('p', p.toString());
+			targetUrl.searchParams.set('p', p.toString());
 		}
-		page.url.hash = '';
-		return page.url.href;
+		// Keep current hash (for example #validator-rewards) so tabbed pages stay on active tab.
+		targetUrl.hash = page.url.hash;
+		return targetUrl.href;
 	};
 	let firstUrl = page.url.href;
 	$: if (current) firstUrl = getUrl(0, 1);
