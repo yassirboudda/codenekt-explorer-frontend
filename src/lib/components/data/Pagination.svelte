@@ -56,10 +56,20 @@
 </script>
 
 <div class="pagination {className}">
-	<a href={firstUrl} class="badge" class:disabled={!isDomLoaded || current <= 1}>
+	<a
+		href={firstUrl}
+		data-sveltekit-reload
+		class="badge"
+		class:disabled={!isDomLoaded || current <= 1}
+	>
 		<FirstIcon />
 	</a>
-	<a href={prevUrl} class="badge" class:disabled={!isDomLoaded || current <= 1}>
+	<a
+		href={prevUrl}
+		data-sveltekit-reload
+		class="badge"
+		class:disabled={!isDomLoaded || current <= 1}
+	>
 		<PrevIcon />
 	</a>
 	<button
@@ -72,10 +82,20 @@
 		<span>/</span>
 		<span>{total}</span>
 	</button>
-	<a href={nextUrl} class="badge" class:disabled={!isDomLoaded || current >= total}>
+	<a
+		href={nextUrl}
+		data-sveltekit-reload
+		class="badge"
+		class:disabled={!isDomLoaded || current >= total}
+	>
 		<NextIcon />
 	</a>
-	<a href={lastUrl} class="badge" class:disabled={!isDomLoaded || current >= total}>
+	<a
+		href={lastUrl}
+		data-sveltekit-reload
+		class="badge"
+		class:disabled={!isDomLoaded || current >= total}
+	>
 		<LastIcon />
 	</a>
 
