@@ -57,7 +57,7 @@
 	</div>
 
 	{#if totalPages > 1}
-		<Pagination class="mx-auto" total={totalPages} />
+		<Pagination class="mx-auto" total={totalPages} hash="#validator-rewards" />
 	{/if}
 </div>
 

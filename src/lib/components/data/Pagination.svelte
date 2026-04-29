@@ -12,6 +12,7 @@
 	export { className as class };
 
 	export let total = 10;
+	export let hash = '';
 
 	let isDomLoaded = false;
 	let isSettingsOpen = false;
@@ -27,6 +28,8 @@
 
 	const getUrl = (relative = 0, absolute = 0) => {
 		const targetUrl = new URL(page.url);
+		const currentHash =
+			hash || (typeof window !== 'undefined' ? window.location.hash : '') || page.url.hash;
 		let p = current;
 		if (relative) {
 			p = Math.max(1, Math.min(total, current + relative));
@@ -38,8 +41,8 @@
 		} else {
 			targetUrl.searchParams.set('p', p.toString());
 		}
-		// Keep current hash (for example #validator-rewards) so tabbed pages stay on active tab.
-		targetUrl.hash = page.url.hash;
+		// Keep or force current hash (for example #validator-rewards) so tabbed pages stay on active tab.
+		targetUrl.hash = currentHash;
 		return targetUrl.href;
 	};
 	let firstUrl = page.url.href;
