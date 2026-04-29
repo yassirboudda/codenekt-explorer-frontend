@@ -4,7 +4,7 @@ import { redirect } from '@sveltejs/kit';
 import { calculateTotalPages, getPaginationParams } from '$lib/server/pagination';
 
 export const load: PageServerLoad = async ({ params, url }) => {
-	const { skip, limit } = getPaginationParams(url);
+	const { pageNum, skip, limit } = getPaginationParams(url);
 	const [entity, { transactions, total }, validatorRewards] = await Promise.all([
 		api.resolveEntity(params.address),
 		await api.getTransactions({
@@ -12,7 +12,12 @@ export const load: PageServerLoad = async ({ params, url }) => {
 			limit,
 			address: params.address
 		}),
-		api.getValidatorRewards(params.address, { skip, limit })
+		api.getValidatorRewards(params.address, {
+			skip,
+			offset: skip,
+			page: pageNum,
+			limit
+		})
 	]);
 
 	const rewardsTotal = Number(
