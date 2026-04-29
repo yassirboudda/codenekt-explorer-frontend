@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Component } from 'svelte';
 	import { page } from '$app/state';
+	import { onMount } from 'svelte';
 
 	export let tabs: {
 		label: string;
@@ -14,9 +15,20 @@
 		if (typeof window !== 'undefined' && window.location.hash) return window.location.hash;
 		return page.url.hash;
 	};
+	const getTabIndex = () =>
+		tabs.findIndex((t) => {
+			return t.label.toLowerCase().replaceAll(' ', '-') === getHash().toLowerCase().replace('#', '');
+		});
 
-	$: activeTab = tabs.findIndex((t) => {
-		return t.label.toLowerCase().replaceAll(' ', '-') === getHash().toLowerCase().replace('#', '');
+	$: activeTab = getTabIndex();
+
+	onMount(() => {
+		const syncFromHash = () => {
+			activeTab = getTabIndex();
+		};
+		syncFromHash();
+		window.addEventListener('hashchange', syncFromHash);
+		return () => window.removeEventListener('hashchange', syncFromHash);
 	});
 </script>
 
