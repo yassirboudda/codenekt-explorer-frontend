@@ -12,8 +12,12 @@ export const load: PageServerLoad = async ({ params, url }) => {
 			limit,
 			address: params.address
 		}),
-		api.getValidatorRewards(params.address, { limit: 25, skip: 0 })
+		api.getValidatorRewards(params.address, { skip, limit })
 	]);
+
+	const rewardsTotal = Number(
+		validatorRewards?.pagination?.total ?? validatorRewards?.summary?.blocksProduced ?? 0
+	);
 
 	const urlPath = `/${entity.kind}/${params.address ?? ''}`;
 	if (['address', 'contract', 'token'].includes(entity.kind) && !url.pathname.startsWith(urlPath)) {
@@ -26,6 +30,7 @@ export const load: PageServerLoad = async ({ params, url }) => {
 		transactions,
 		total,
 		totalPages: calculateTotalPages(total, limit),
-		validatorRewards
+		validatorRewards,
+		validatorRewardsTotalPages: calculateTotalPages(rewardsTotal, limit)
 	};
 };

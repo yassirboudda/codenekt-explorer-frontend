@@ -50,7 +50,10 @@
 				class="!p-0"
 			/>
 		{:else if hasValidatorRewards && tab === 1}
-			<ValidatorRewardsList rewards={validatorRewards} />
+			<ValidatorRewardsList
+				rewards={validatorRewards}
+				totalPages={page?.data?.validatorRewardsTotalPages ?? 1}
+			/>
 		{:else if tab === baseContractTabIndex}
 			<ContractSource {entity} />
 		{:else if tab === baseContractTabIndex + 1}

@@ -1,7 +1,9 @@
 <script lang="ts">
+	import Pagination from '$lib/components/data/Pagination.svelte';
 	import { formatAddress } from '$lib/utils';
 
 	export let rewards: any = {};
+	export let totalPages: number = 1;
 
 	$: rows = Array.isArray(rewards?.rows) ? rewards.rows : [];
 	$: summary = rewards?.summary ?? {};
@@ -53,6 +55,10 @@
 			</table>
 		</div>
 	</div>
+
+	{#if totalPages > 1}
+		<Pagination class="mx-auto" total={totalPages} />
+	{/if}
 </div>
 
 <style lang="postcss">
