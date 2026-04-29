@@ -9,11 +9,14 @@
 	}[] = [];
 	export let tabClass = '';
 
-	let pageHash = page.url.hash;
-
 	let activeTab = 0;
+	const getHash = () => {
+		if (typeof window !== 'undefined' && window.location.hash) return window.location.hash;
+		return page.url.hash;
+	};
+
 	$: activeTab = tabs.findIndex((t) => {
-		return t.label.toLowerCase().replaceAll(' ', '-') === pageHash.toLowerCase().replace('#', '');
+		return t.label.toLowerCase().replaceAll(' ', '-') === getHash().toLowerCase().replace('#', '');
 	});
 </script>
 
