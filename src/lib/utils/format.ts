@@ -42,3 +42,11 @@ export const formatTokenAmount = (
 		maximumFractionDigits: maxDecimals
 	}).format(nbr);
 };
+
+export const formatCdkAmount = (
+	value: number | string,
+	options: { minDecimals?: number; maxDecimals?: number } = {}
+) => {
+	const scaled = Number(value) * 1000;
+	return formatTokenAmount(Number.isFinite(scaled) ? scaled : 0, options);
+};

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { formatAddress, formatTokenAmount, firstLetterUpperCase } from '$lib/utils';
+	import { formatAddress, formatCdkAmount, firstLetterUpperCase } from '$lib/utils';
 	import EntityPage from '$lib/components/entity/EntityPage.svelte';
 	import EntityTabs from '$lib/components/entity/EntityTabs.svelte';
 	import WalletIcon from 'virtual:icons/hugeicons/wallet-01';
@@ -16,7 +16,7 @@
 				{ label: 'Address', value: data?.entity?.address ?? '', copy: true },
 				{
 					label: 'Balance',
-					value: `${formatTokenAmount(data?.entity?.balance ?? 0, { maxDecimals: 3 })} ${data.nativeSymbol}`
+					value: `${formatCdkAmount(data?.entity?.balance ?? 0, { maxDecimals: 0 })} ${data.nativeSymbol}`
 				},
 				...(data?.entity?.proxyResolution?.isProxy ? [{ label: 'Proxy', value: 'true' }] : [])
 			]

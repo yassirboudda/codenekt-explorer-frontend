@@ -1,6 +1,6 @@
 <script lang="ts">
 	import EntityList from '$lib/components/data/EntityList.svelte';
-	import { formatAddress, formatTokenAmount } from '$lib/utils';
+	import { formatAddress, formatCdkAmount } from '$lib/utils';
 
 	export let data;
 </script>
@@ -25,7 +25,7 @@
 				</div>
 				<div class="col">
 					<div class="label">Total Rewards</div>
-					<div class="value">{formatTokenAmount(row.totalRewardCDK ?? 0, { maxDecimals: 3 })} CDK</div>
+					<div class="value">{formatCdkAmount(row.totalRewardCDK ?? 0, { maxDecimals: 0 })} CDK</div>
 				</div>
 				<div class="col">
 					<div class="label">Latest Block</div>
