@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Pagination from '$lib/components/data/Pagination.svelte';
-	import { formatAddress } from '$lib/utils';
+	import { formatAddress, formatTokenAmount } from '$lib/utils';
 
 	export let rewards: any = {};
 	export let totalPages: number = 1;
@@ -17,7 +17,7 @@
 		</div>
 		<div class="stat-card">
 			<div class="stat-label">Total Rewards (CDK)</div>
-			<div class="stat-value">{summary?.totalRewardCDK ?? '0'}</div>
+			<div class="stat-value">{formatTokenAmount(summary?.totalRewardCDK ?? 0, { maxDecimals: 3 })}</div>
 		</div>
 	</div>
 
@@ -42,7 +42,7 @@
 								<td>{new Date((row.timestamp ?? 0) * 1000).toLocaleString()}</td>
 								<td>{row.txCount ?? 0}</td>
 								<td>{row.gasUsed ?? 0}</td>
-								<td>{row.rewardCDK ?? '0'}</td>
+								<td>{formatTokenAmount(row.rewardCDK ?? 0, { maxDecimals: 6 })}</td>
 								<td><a href="/address/{row.miner}" class="link">{formatAddress(row.miner ?? '', 8)}</a></td>
 							</tr>
 						{/each}

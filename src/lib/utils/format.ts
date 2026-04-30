@@ -29,3 +29,16 @@ export const formatNumber = (nbr: number | string, decimals = 1) => {
 export const firstLetterUpperCase = (str: string) => {
 	return str.charAt(0).toUpperCase() + str.slice(1);
 };
+
+export const formatTokenAmount = (
+	value: number | string,
+	options: { minDecimals?: number; maxDecimals?: number } = {}
+) => {
+	const { minDecimals = 0, maxDecimals = 3 } = options;
+	const nbr = Number(value);
+	if (!Number.isFinite(nbr)) return String(value ?? '0');
+	return new Intl.NumberFormat('en-US', {
+		minimumFractionDigits: minDecimals,
+		maximumFractionDigits: maxDecimals
+	}).format(nbr);
+};
